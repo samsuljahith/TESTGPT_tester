@@ -1,0 +1,36 @@
+# sample.yaml  – a super-simple product spec
+product: SpaceRockets
+version: "1.0"
+
+openapi:
+  openapi: 3.0.0
+  info:
+    title: Rocket Store API
+    version: 1.0.0
+  paths:
+    /rockets/{id}:
+      get:
+        summary: Get one rocket
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema: { type: integer }
+        responses:
+          "200":
+            description: Rocket found
+          "404":
+            description: Rocket not found
+
+user_stories:
+  - As a customer, I want to view rocket details so that I can decide to buy.
+  - As an admin, I want to list all rockets.
+
+nfr:
+  - p95 latency < 300 ms
+  - support 1000 concurrent users
+
+data_flow:
+  source: sales_csv
+  transform: clean + enrich
+  target: analytics_warehouse

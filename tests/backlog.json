@@ -1,0 +1,23 @@
+
+[
+  {
+    "id": "rocket-GET1",
+    "risk": 0.1,
+    "agent": "api"
+  },
+  {
+    "id": "ui-views",
+    "risk": 0.2,
+    "agent": "ui"
+  },
+  {
+    "id": "data-cleanenrich",
+    "risk": 0.1,
+    "agent": "data"
+  },
+  {
+    "id": "support-1000",
+    "risk": 0.6,
+    "agent": "nfr"
+  }
+]
