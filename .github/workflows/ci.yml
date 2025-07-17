@@ -1,0 +1,46 @@
+name: TESTGPT Agents CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install deps
+        run: |
+          pip install openai-agents pytest httpx playwright locust pyyaml
+
+      - name: 🔌 Generate API test
+        run: |
+          python -c "from my_agents.api_agent import generate_api_test; generate_api_test()"
+
+      - name: 🖥️  Generate UI test
+        run: |
+          python -c "from my_agents.ui_agent import generate_ui_test; generate_ui_test()"
+
+      - name: 📊 Generate Data test
+        run: |
+          python -c "from my_agents.data_agent import generate_data_test; generate_data_test()"
+
+      - name: ⚡ Generate NFR load test
+        run: |
+          python -c "from my_agents.nfr_agent import generate_nfr_test; generate_nfr_test()"
+
+      - name: ✅ Run pytest-based tests
+        run: pytest tests/test_*.py -v
+
+      - name: 🚀 Smoke-load test (10 s)
+        run: |
+          locust -f tests/locustfile.py --headless -u 10 -r 2 -t 10s --host=https://jsonplaceholder.typicode.com
