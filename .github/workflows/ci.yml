@@ -23,18 +23,26 @@ jobs:
           pip install openai-agents pytest httpx playwright locust pyyaml
 
       - name: 🔌 Generate API test
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           python -c "from my_agents.api_agent import generate_api_test; generate_api_test()"
 
       - name: 🖥️  Generate UI test
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           python -c "from my_agents.ui_agent import generate_ui_test; generate_ui_test()"
 
       - name: 📊 Generate Data test
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           python -c "from my_agents.data_agent import generate_data_test; generate_data_test()"
 
       - name: ⚡ Generate NFR load test
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           python -c "from my_agents.nfr_agent import generate_nfr_test; generate_nfr_test()"
 
