@@ -21,8 +21,18 @@ ui_agent = Agent(
     model=groq_model
 )
 
+def clean_code(code):
+    lines = code.splitlines()
+    lines = [line for line in lines if not line.strip().startswith('```')]
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    return "\n".join(lines)
+
 def generate_ui_test():
     sticky = {"id": "UI-S1", "risk": 0.2, "agent": "ui"}
     code = Runner.run_sync(ui_agent, str(sticky)).final_output
+    code = clean_code(code)
     Path("tests/test_ui.py").write_text(code)
     print("✅ tests/test_ui.py created")
