@@ -1,5 +1,1 @@
-{
-  "rockets": [
-    { "id": 123, "name": "Falcon", "price": 2999 }
-  ]
-} 
+{"rockets": [{"id": 123, "name": "Falcon"}]} 
