@@ -6,6 +6,16 @@ on:
   pull_request:
     branches: [ main ]
 
+services:
+  mockapi:
+    image: clue/json-server:latest
+    ports:
+      - 4000:3000
+    options: >-
+      --entrypoint "json-server --watch /data/db.json --port 3000"
+    volumes:
+      - ./fake_api:/data
+
 jobs:
   run-agents:
     runs-on: ubuntu-latest

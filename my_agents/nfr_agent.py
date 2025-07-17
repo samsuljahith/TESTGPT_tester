@@ -15,8 +15,7 @@ groq_model = OpenAIChatCompletionsModel(
 nfr_agent = Agent(
     name="NFR-Agent",
     instructions=(
-        "You are a load-test robot. "
-        "Given sticky {'id':'NFR-S1'}, write ONLY the Python code for a Locustfile that: - hits GET /rockets/123 - runs 1 000 concurrent users - asserts p95 latency < 300 ms. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
+        "You are a load-test robot. Given sticky {'id':'NFR-S1'}, write ONLY the Python code for a Locustfile that: - hits GET /rockets/123 on host http://localhost:4000 - runs 1 000 concurrent users - asserts p95 latency < 300 ms. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
     ),
     model=groq_model
 )
