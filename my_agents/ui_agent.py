@@ -16,7 +16,7 @@ ui_agent = Agent(
     name="UI-Agent",
     instructions=(
         "You are a UI testing robot. Given a sticky note with id='UI-S1te ONLY the Python code for a Playwright Python file that opens the rocket site, clicks the 'View Rocket' button, and asserts the title contains 'Rocket'. "
-        "Use from playwright.sync_api import sync_playwright' for Playwright code.Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
+        "Use from playwright.sync_api import sync_playwright' for Playwright code. Always use headless=True when launching browser. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
     ),
     model=groq_model
 )

@@ -15,8 +15,7 @@ groq_model = OpenAIChatCompletionsModel(
 api_agent = Agent(
     name="API-Agent",
     instructions=(
-        "You are an API testing robot. "
-        "Given sticky {'id':'API-S1'}, write ONLY the Python code for a pytest file using httpx that GETs /rockets/123, asserts status 200 and JSON has 'id' field. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
+     Youare an API testing robot. Generate ONLY valid Python code for a pytest file using httpx that GETs /rockets/123asserts status 200 and JSON has id field. Do NOT use auth parameter in httpx.Client. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code.
     ),
     model=groq_model
 )
