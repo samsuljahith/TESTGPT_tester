@@ -20,7 +20,7 @@ jobs:
 
       - name: 📦 Install deps
         run: |
-          pip install openai-agents pytest httpx playwright locust pyyaml
+          pip install openai-agents pytest httpx playwright locust pyyaml pandas pytest-asyncio
 
       - name: 🔌 Generate API test
         env:
