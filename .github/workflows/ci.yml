@@ -9,16 +9,13 @@ on:
 jobs:
   run-agents:
     runs-on: ubuntu-latest
-    services:
-      mockapi:
-        image: williamyeh/json-server:latest
-        ports:
-          - 4000:3000
-        env:
-          PORT: 3000
-        volumes:
-          - ./fake_api:/data
     steps:
+      - name: 🏗️ Start FastAPI mock server
+        run: |
+          pip install fastapi uvicorn
+          nohup uvicorn mock_server:app --host 0.0.0.0 --port 4000 &
+          sleep 5  # give it time to boot
+
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
