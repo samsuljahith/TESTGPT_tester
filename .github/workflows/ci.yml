@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mockapi:
-        image: clue/json-server:latest
+        image: jsonserver/jsonserver:latest
         ports:
           - 4000:3000
-        options: >-
-          --entrypoint json-server --watch /data/db.json --port 3000
+        env:
+          DB: /data/db.json
         volumes:
           - ./fake_api:/data
     steps:
