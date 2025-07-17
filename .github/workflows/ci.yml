@@ -22,7 +22,11 @@ jobs:
         run: |
           pip install openai-agents pytest httpx playwright locust pyyaml pandas pytest-asyncio sqlalchemy
 
-      - name: 🔌 Generate API test
+      - name: 🎭 Install Playwright browsers
+        run: |
+          playwright install
+
+      - name: �� Generate API test
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
