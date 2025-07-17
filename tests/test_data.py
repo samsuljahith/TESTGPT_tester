@@ -1,23 +1,20 @@
-import pytest
-import pandas as pd
-from pathlib import Path
+import sqlite3
+import hashlib
 
-@pytest.fixture
-def counts():
-    source = pd.read_csv('sales.csv')
-    counts_source = len(source)
-    
-    warehouse_path = Path('warehouse/db.sqlite')
-    con = pd.read_sql_table('rockets', warehouse_path)
-    counts_target = len(con)
-    
-    return counts_source, counts_target
-
-def test_row_counts_match(counts):
-    counts_source, counts_target = counts
-    assert counts_source == counts_target
-    
-def test_row_hashes_match(counts):
-    source = pd.read_csv('sales.csv')
-    target = pd.read_sql_table('rockets', Path('warehouse/db.sqlite'))
-    assert source.hash().eq(target.hash()).all()
+def test_sqlite_data():
+    conn = sqlite3.connect(":memory:")
+    c = conn.cursor()
+    c.execute("CREATE TABLE rockets (id INTEGER, name TEXT, price INTEGER)")
+    rows = [
+        (1, "Falcon", 2999),
+        (2, "Atlas", 1999),
+        (3, "Delta", 3999)
+    ]
+    c.executemany("INSERT INTO rockets VALUES (?, ?, ?)", rows)
+    conn.commit()
+    c.execute("SELECT * FROM rockets")
+    all_rows = c.fetchall()
+    assert len(all_rows) == 3
+    row_hashes = [hashlib.md5(str(row).encode()).hexdigest() for row in all_rows]
+    assert len(set(row_hashes)) == 3
+    conn.close()

@@ -1,7 +1,9 @@
 import httpx
-import pytest
 
-def test_rockets():
-    response = httpx.get("http://localhost:4000/rockets/123")
+def test_get_rocket():
+    url = "http://localhost:4000/rockets/123"
+    response = httpx.get(url)
     assert response.status_code == 200
-    assert 'id' in response.json()
+    data = response.json()
+    assert "id" in data
+    assert data["id"] == 123
