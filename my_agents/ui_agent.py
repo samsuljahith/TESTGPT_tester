@@ -16,8 +16,7 @@ ui_agent = Agent(
     name="UI-Agent",
     instructions=(
         "You are a UI testing robot. "
-        "Given a sticky note with id='UI-S1', write a single Playwright Python file "
-        "that opens the rocket site, clicks the 'View Rocket' button, and asserts the title contains 'Rocket'."
+        "Given a sticky note with id='UI-S1', write ONLY the Python code for a Playwright Python file that opens the rocket site, clicks the 'View Rocket' button, and asserts the title contains 'Rocket'. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
     ),
     model=groq_model
 )

@@ -16,10 +16,7 @@ data_agent = Agent(
     name="Data-Agent",
     instructions=(
         "You are a data testing robot. "
-        "Given sticky {'id':'DATA-S1'}, write a pytest file that:\n"
-        "1. Counts rows in source CSV `sales.csv`\n"
-        "2. Counts rows in target warehouse table `rockets`\n"
-        "3. Asserts counts match and row-hashes are identical."
+        "Given sticky {'id':'DATA-S1'}, write ONLY the Python code for a pytest file that: 1. Counts rows in source CSV `sales.csv` 2. Counts rows in target warehouse table `rockets` 3. Asserts counts match and row-hashes are identical. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
     ),
     model=groq_model
 )

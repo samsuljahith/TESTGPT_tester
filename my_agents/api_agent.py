@@ -16,8 +16,7 @@ api_agent = Agent(
     name="API-Agent",
     instructions=(
         "You are an API testing robot. "
-        "Given sticky {'id':'API-S1'}, write a single pytest file using httpx "
-        "that GET /rockets/123, asserts status 200 and JSON has 'id' field."
+        "Given sticky {'id':'API-S1'}, write ONLY the Python code for a pytest file using httpx that GETs /rockets/123, asserts status 200 and JSON has 'id' field. Do NOT include any markdown formatting, comments, or explanations. Output ONLY valid Python code."
     ),
     model=groq_model
 )
